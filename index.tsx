@@ -55,8 +55,8 @@ import {
 } from 'lucide-react';
 
 /**
- * INFINETH SOLUTIONS - PRODUCTION V2.5
- * Refined Dropdowns & Snappy UI Interactions
+ * INFINETH SOLUTIONS - PRODUCTION V2.6
+ * Proportionally Balanced & Harmonized UI
  */
 
 // --- Types ---
@@ -69,11 +69,11 @@ type PageID =
 
 // --- Global Typography Constants ---
 const UI_CLASSES = {
-  displayLarge: "text-6xl md:text-9xl font-black tracking-tighter leading-[0.85]",
-  sectionTitle: "text-6xl md:text-8xl font-black tracking-tighter leading-[0.9]",
+  displayLarge: "text-5xl md:text-8xl font-black tracking-tighter leading-[0.9]",
+  sectionTitle: "text-5xl md:text-7xl font-black tracking-tighter leading-[0.95]",
   cardTitle: "text-2xl font-black tracking-tighter leading-tight",
   tag: "font-black uppercase tracking-[0.4em] text-[10px] block",
-  bodyLarge: "text-xl font-bold leading-relaxed opacity-60",
+  bodyLarge: "text-lg md:text-xl font-bold leading-relaxed opacity-60",
 };
 
 // --- Constants & Config ---
@@ -149,11 +149,11 @@ const NAV_CONFIG = [
 ];
 
 const ISO_DATA = [
-  { id: "9001", title: "ISO 9001:2015", description: "Quality Management Systems. Consistently meeting customer and statutory requirements." },
-  { id: "14001", title: "ISO 14001:2015", description: "Environmental Management Systems. Systematic management of environmental footprints." },
-  { id: "45001", title: "ISO 45001:2018", description: "Occupational Health & Safety. Bedrock of our Nationwide field operations." },
+  { id: "9001", title: "ISO 9001:2015", description: "Quality Management Systems. Meeting statutory and stakeholder requirements." },
+  { id: "14001", title: "ISO 14001:2015", description: "Environmental Management. Systematic management of environmental footprints." },
+  { id: "45001", title: "ISO 45001:2018", description: "Health & Safety. The foundation of our nationwide field operations." },
   { id: "27001", title: "ISO 27001:2022", description: "Information Security. Rigorous risk-based security controls." },
-  { id: "22301", title: "ISO 22301:2019", description: "Business Continuity. Maintaining national operations during disruptions." }
+  { id: "22301", title: "ISO 22301:2019", description: "Business Continuity. Maintaining operations during disruptions." }
 ];
 
 const TRUST_PARTNERS = ["NOKIA", "SAFARICOM", "UNITED NATIONS (UN)", "ETHIO TELECOM", "HUAWEI", "ERICSSON", "ZTE", "ABB"];
@@ -198,26 +198,27 @@ const Brand = ({ forceInvert = true, className = "", onClick }: { forceInvert?: 
   </div>
 );
 
-const SubPageLayout = ({ children, tag, title, description, color = "text-brand-blue", onBack }: { children: React.ReactNode, tag: string, title: string, description: string, color?: string, onBack: () => void }) => (
-  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="pt-48 pb-24 min-h-screen">
+// Fix: Making children optional to ensure compatibility with TS in environments where JSX nested children are not automatically included in the props type.
+const SubPageLayout = ({ children, tag, title, description, color = "text-brand-blue", onBack }: { children?: React.ReactNode, tag: string, title: string, description: string, color?: string, onBack: () => void }) => (
+  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="pt-32 pb-20 min-h-screen">
     <div className="container mx-auto px-6">
-      <nav className="flex items-center gap-4 mb-16 text-[10px] font-black uppercase tracking-[0.3em]">
+      <nav className="flex items-center gap-4 mb-12 text-[10px] font-black uppercase tracking-[0.3em]">
         <button onClick={onBack} className="flex items-center gap-2 text-slate-400 hover:text-brand-blue transition-colors">
           <Home size={14} /> Home
         </button>
         <ChevronRight size={12} className="text-slate-200" />
         <span className={color}>{tag}</span>
       </nav>
-      <div className="mb-24">
-        <span className={`${color} ${UI_CLASSES.tag} mb-8`}>{tag}</span>
-        <h2 className={`${UI_CLASSES.sectionTitle} text-brand-charcoal mb-8 max-w-5xl`}>{title}</h2>
+      <div className="mb-16">
+        <span className={`${color} ${UI_CLASSES.tag} mb-6`}>{tag}</span>
+        <h2 className={`${UI_CLASSES.sectionTitle} text-brand-charcoal mb-6 max-w-5xl`}>{title}</h2>
         <p className={`text-slate-500 max-w-3xl ${UI_CLASSES.bodyLarge}`}>{description}</p>
       </div>
       {children}
-      <div className="mt-32 pt-16 border-t border-slate-100 flex justify-between items-center">
+      <div className="mt-24 pt-12 border-t border-slate-100 flex justify-between items-center">
          <button onClick={onBack} className="flex items-center gap-4 text-brand-blue font-black uppercase text-xs tracking-widest group">
-            <div className="w-12 h-12 rounded-full border border-brand-blue flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-all"><ChevronRight className="rotate-180" size={18} /></div>
-            Back to Home Overview
+            <div className="w-10 h-10 rounded-full border border-brand-blue flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-all"><ChevronRight className="rotate-180" size={16} /></div>
+            Back to Overview
          </button>
          <Brand forceInvert={false} onClick={onBack} className="opacity-20 hover:opacity-100 transition-opacity" />
       </div>
@@ -239,83 +240,81 @@ const HeroSlider = ({ onOpenContact }: { onOpenContact: () => void }) => {
   }, [slides.length]);
 
   return (
-    <section className="relative h-screen min-h-[800px] w-full overflow-hidden bg-brand-charcoal">
+    <section className="relative h-[85vh] md:h-screen min-h-[700px] w-full overflow-hidden bg-brand-charcoal">
       <AnimatePresence mode="wait">
-        <motion.div 
-          key={current} 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }} 
-          exit={{ opacity: 0 }} 
-          transition={{ duration: 1.5 }} 
-          className="absolute inset-0"
-        >
+        <motion.div key={current} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1.5 }} className="absolute inset-0">
           <motion.img 
             src={slides[current].img} 
-            className="w-full h-full object-cover brightness-[0.4]" 
+            className="w-full h-full object-cover brightness-[0.35]" 
             alt="Hero Background" 
             initial={{ scale: 1.1, x: -20, y: -20 }}
             animate={{ scale: 1, x: 0, y: 0 }}
-            transition={{ duration: 10, ease: "linear" }}
+            transition={{ duration: 12, ease: "linear" }}
           />
         </motion.div>
       </AnimatePresence>
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-charcoal/40 via-transparent to-brand-charcoal/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-charcoal/30 via-transparent to-brand-charcoal/80" />
       <div className="relative z-10 container mx-auto px-6 h-full flex flex-col justify-center">
-        <motion.div key={`text-${current}`} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="max-w-5xl">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-1 bg-brand-cyan" />
-            <span className="text-brand-cyan font-black tracking-[0.5em] text-[10px] uppercase">ISO Certified Global Engineering Firm</span>
+        <motion.div key={`text-${current}`} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="max-w-4xl">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-1 bg-brand-cyan" />
+            <span className="text-brand-cyan font-black tracking-[0.4em] text-[9px] md:text-[10px] uppercase">ISO Certified Global Engineering</span>
           </div>
-          <h1 className={UI_CLASSES.displayLarge + " text-white mb-12"}>{slides[current].title}</h1>
-          <p className="text-white/60 text-xl md:text-2xl font-bold max-w-2xl mb-16 leading-relaxed">{slides[current].subtitle}</p>
-          <div className="flex flex-wrap gap-6">
-            <button onClick={onOpenContact} className="px-12 py-6 bg-brand-cyan text-[#001E3C] rounded-2xl font-black tracking-widest text-[11px] uppercase hover:bg-white transition-all shadow-2xl flex items-center gap-4 group">
-              Start Partnership <ArrowRight size={18} />
+          <h1 className={UI_CLASSES.displayLarge + " text-white mb-10"}>{slides[current].title}</h1>
+          <p className="text-white/60 text-lg md:text-2xl font-bold max-w-2xl mb-12 leading-relaxed">{slides[current].subtitle}</p>
+          <div className="flex flex-wrap gap-5">
+            <button onClick={onOpenContact} className="px-10 py-5 bg-brand-cyan text-[#001E3C] rounded-xl font-black tracking-widest text-[10px] uppercase hover:bg-white transition-all shadow-xl flex items-center gap-3 group">
+              Start Partnership <ArrowRight size={16} />
             </button>
-            <button className="px-12 py-6 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-2xl font-black tracking-widest text-[11px] uppercase hover:bg-white/20 transition-all">
+            <button className="px-10 py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-xl font-black tracking-widest text-[10px] uppercase hover:bg-white/20 transition-all">
               Capability View
             </button>
           </div>
         </motion.div>
       </div>
-      <div className="absolute bottom-16 right-6 z-10 flex gap-4">
+      <div className="absolute bottom-12 right-6 z-10 flex gap-3">
         {slides.map((_, i) => (
-          <button key={i} onClick={() => setCurrent(i)} className={`h-1 transition-all duration-500 rounded-full ${current === i ? 'bg-brand-cyan w-16' : 'bg-white/20 w-8'}`} />
+          <button key={i} onClick={() => setCurrent(i)} className={`h-1 transition-all duration-500 rounded-full ${current === i ? 'bg-brand-cyan w-12' : 'bg-white/20 w-6'}`} />
         ))}
       </div>
     </section>
   );
 };
 
-const ClientTrustBar = () => {
-  return (
-    <div className="sticky bottom-0 left-0 w-full bg-white/70 backdrop-blur-xl border-t border-slate-200/50 z-[90] py-4 shadow-2xl overflow-hidden group">
-      <div className="container mx-auto px-6 flex items-center gap-12">
-        <div className="hidden md:flex items-center gap-4 shrink-0 border-r border-slate-200 pr-12">
-          <ShieldCheck size={18} className="text-brand-emerald" />
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Trusted Industry <br/> Partners</span>
+// Updated Trust Bar component with a subtle dark background and clearly visible logos/text.
+const ClientTrustBar = () => (
+  <div className="sticky bottom-0 left-0 w-full bg-slate-900/95 backdrop-blur-xl border-t border-white/5 z-[90] py-4 shadow-2xl overflow-hidden group">
+    <div className="container mx-auto px-6 flex items-center gap-10">
+      {/* Context Label */}
+      <div className="hidden md:flex items-center gap-3 shrink-0 border-r border-white/10 pr-10">
+        <ShieldCheck size={16} className="text-brand-cyan" />
+        <span className="text-[9px] font-black uppercase tracking-[0.15em] text-white/40 leading-tight">Strategic <br/> Alliances</span>
+      </div>
+      
+      {/* Horizontal Scrolling Marquee */}
+      <div className="flex-grow overflow-hidden relative">
+        <div className="flex gap-16 items-center animate-marquee whitespace-nowrap py-1.5 opacity-60 group-hover:opacity-100 transition-opacity duration-700">
+          {TRUST_PARTNERS.concat(TRUST_PARTNERS).map((partner, i) => (
+            <span key={i} className="text-lg md:text-xl font-black text-white tracking-tighter uppercase inline-block">
+              {partner}
+            </span>
+          ))}
         </div>
-        <div className="flex-grow overflow-hidden relative">
-          <div className="flex gap-20 items-center animate-marquee whitespace-nowrap py-2 opacity-50 group-hover:opacity-100 transition-opacity duration-700">
-            {TRUST_PARTNERS.concat(TRUST_PARTNERS).map((partner, i) => (
-              <span key={i} className="text-xl md:text-2xl font-black text-brand-charcoal tracking-tighter uppercase inline-block">
-                {partner}
-              </span>
-            ))}
-          </div>
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white/80 to-transparent pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white/80 to-transparent pointer-events-none" />
-        </div>
-        <div className="hidden lg:flex shrink-0 items-center gap-6">
-          <div className="flex items-center gap-2">
-            <Award size={16} className="text-brand-blue" />
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">ISO 9001 Quality Certified</span>
-          </div>
+        {/* Subtle Side Fades in dark mode */}
+        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-slate-900 to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-slate-900 to-transparent pointer-events-none" />
+      </div>
+      
+      {/* Secondary Info */}
+      <div className="hidden lg:flex shrink-0 items-center gap-5">
+        <div className="flex items-center gap-2">
+          <Award size={14} className="text-brand-cyan" />
+          <span className="text-[9px] font-black uppercase tracking-widest text-white/30">Global Engineering Partner</span>
         </div>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 const CountUp = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
   const [count, setCount] = useState(0);
@@ -329,47 +328,47 @@ const CountUp = ({ value, suffix = "" }: { value: number; suffix?: string }) => 
 
 const CorporatePages = {
   Identity: ({ onBack }: { onBack: () => void }) => (
-    <SubPageLayout onBack={onBack} tag="Corporate Identity" title="Foundations of Reliability." description="Pioneering Ethiopia's infrastructure landscape since 1995 with technical precision.">
-      <div className="grid lg:grid-cols-2 gap-24 items-center">
-        <div className="space-y-12">
-          <div className="flex gap-8 group"><div className="w-16 h-16 rounded-2xl bg-brand-blue flex items-center justify-center text-white shrink-0 group-hover:rotate-6 transition-transform"><History size={32} /></div><div><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-4"}>A Legacy of Resilience</h3><p className="text-slate-500 font-medium leading-relaxed">Maintaining a zero-failure record on mission-critical national assets across three decades of growth.</p></div></div>
-          <div className="flex gap-8 group"><div className="w-16 h-16 rounded-2xl bg-brand-cyan flex items-center justify-center text-brand-charcoal shrink-0 group-hover:rotate-6 transition-transform"><Target size={32} /></div><div><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-4"}>Strategic Mission</h3><p className="text-slate-500 font-medium leading-relaxed">Accelerating national digital transformation through high-availability infrastructure platforms.</p></div></div>
+    <SubPageLayout onBack={onBack} tag="Corporate Identity" title="Foundations of Reliability." description="Pioneering Ethiopia's infrastructure landscape since 1995.">
+      <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="space-y-10">
+          <div className="flex gap-6 group"><div className="w-14 h-14 rounded-xl bg-brand-blue flex items-center justify-center text-white shrink-0 group-hover:rotate-6 transition-transform"><History size={28} /></div><div><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-3"}>A Legacy of Resilience</h3><p className="text-slate-500 font-medium leading-relaxed text-sm">Maintaining a zero-failure record on mission-critical national assets.</p></div></div>
+          <div className="flex gap-6 group"><div className="w-14 h-14 rounded-xl bg-brand-cyan flex items-center justify-center text-brand-charcoal shrink-0 group-hover:rotate-6 transition-transform"><Target size={28} /></div><div><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-3"}>Strategic Mission</h3><p className="text-slate-500 font-medium leading-relaxed text-sm">Accelerating digital transformation through resilient infrastructure.</p></div></div>
         </div>
-        <div className="rounded-[4rem] overflow-hidden shadow-2xl h-[600px] bg-slate-200"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" className="w-full h-full object-cover" alt="Identity" /></div>
+        <div className="rounded-[3rem] overflow-hidden shadow-xl h-[500px] bg-slate-200"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" className="w-full h-full object-cover" alt="Identity" /></div>
       </div>
     </SubPageLayout>
   ),
   Leadership: ({ onBack }: { onBack: () => void }) => (
-    <SubPageLayout onBack={onBack} tag="Leadership Team" title="Architects of Growth." description="Global technical mastery fused with regional operational intelligence.">
-      <div className="grid md:grid-cols-3 gap-12">
-        {[{n:"Dawit Amare", r:"CEO", b:"25+ years in infrastructure rollout."}, {n:"Sara Teferra", r:"CTO", b:"Leading digital convergence strategies."}, {n:"Elias Bekele", r:"VP Operations", b:"Overseeing nationwide field services."}].map((l, i) => (
-          <div key={i} className="bg-white p-12 rounded-[3rem] border border-slate-100 group shadow-sm hover:shadow-xl transition-all">
-            <div className="w-20 h-20 bg-brand-charcoal rounded-full mb-8 flex items-center justify-center text-white font-black text-2xl uppercase shadow-xl">{l.n.charAt(0)}</div>
-            <h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-2"}>{l.n}</h3><p className="text-brand-blue font-black text-[10px] tracking-widest uppercase mb-6">{l.r}</p><p className="text-slate-400 font-medium text-sm leading-relaxed">{l.b}</p>
+    <SubPageLayout onBack={onBack} tag="Leadership Team" title="Architects of Growth." description="Global technical mastery fused with regional intelligence.">
+      <div className="grid md:grid-cols-3 gap-8">
+        {[{n:"Dawit Amare", r:"CEO", b:"25+ years in rollout."}, {n:"Sara Teferra", r:"CTO", b:"Digital convergence strategies."}, {n:"Elias Bekele", r:"VP Operations", b:"Nationwide field services."}].map((l, i) => (
+          <div key={i} className="bg-white p-10 rounded-[2.5rem] border border-slate-100 group shadow-sm hover:shadow-xl transition-all">
+            <div className="w-16 h-16 bg-brand-charcoal rounded-full mb-6 flex items-center justify-center text-white font-black text-xl uppercase shadow-lg">{l.n.charAt(0)}</div>
+            <h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-1.5"}>{l.n}</h3><p className="text-brand-blue font-black text-[9px] tracking-widest uppercase mb-4">{l.r}</p><p className="text-slate-400 font-medium text-xs leading-relaxed">{l.b}</p>
           </div>
         ))}
       </div>
     </SubPageLayout>
   ),
   Board: ({ onBack }: { onBack: () => void }) => (
-    <SubPageLayout onBack={onBack} tag="Governance" title="Board of Directors." description="Committed to maintaining global ethical standards and structural transparency.">
-      <div className="bg-brand-charcoal text-white rounded-[4rem] p-16 md:p-24 relative overflow-hidden">
-        <div className="absolute top-0 right-0 opacity-[0.03] pointer-events-none"><LogoSymbol className="w-96 h-96 scale-150" forceInvert={true} /></div>
-        <div className="relative z-10 grid md:grid-cols-2 gap-24">
-          <div className="space-y-8"><h3 className="text-4xl font-black tracking-tighter text-brand-cyan">Strategic Oversight</h3><p className="text-white/60 font-medium leading-relaxed">Our board provides independent oversight of our long-term strategy, ESG commitments, and financial integrity.</p><div className="flex gap-4"><ShieldCheck size={40} className="text-brand-emerald" /><Award size={40} className="text-brand-blue" /></div></div>
-          <div className="space-y-6">{["Advisory Councils", "ESG Oversight", "Technical Audit Board"].map(t => <div key={t} className="pb-6 border-b border-white/10 flex justify-between items-center group cursor-pointer hover:border-brand-cyan transition-colors"><span className="text-xl font-bold">{t}</span><ArrowRight size={20} className="text-brand-cyan group-hover:translate-x-2 transition-transform" /></div>)}</div>
+    <SubPageLayout onBack={onBack} tag="Governance" title="Board of Directors." description="Committed to maintaining global ethical standards and transparency.">
+      <div className="bg-brand-charcoal text-white rounded-[3rem] p-12 md:p-20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 opacity-[0.02] pointer-events-none"><LogoSymbol className="w-80 h-80 scale-150" forceInvert={true} /></div>
+        <div className="relative z-10 grid md:grid-cols-2 gap-16">
+          <div className="space-y-6"><h3 className="text-3xl font-black tracking-tighter text-brand-cyan">Strategic Oversight</h3><p className="text-white/50 font-medium leading-relaxed text-sm">Providing independent oversight of our strategy, ESG commitments, and financial integrity.</p><div className="flex gap-4"><ShieldCheck size={32} className="text-brand-emerald" /><Award size={32} className="text-brand-blue" /></div></div>
+          <div className="space-y-4">{["Advisory Councils", "ESG Oversight", "Technical Audit Board"].map(t => <div key={t} className="pb-4 border-b border-white/10 flex justify-between items-center group cursor-pointer hover:border-brand-cyan transition-colors"><span className="text-lg font-bold">{t}</span><ArrowRight size={18} className="text-brand-cyan group-hover:translate-x-2 transition-transform" /></div>)}</div>
         </div>
       </div>
     </SubPageLayout>
   ),
   Portfolio: ({ onBack }: { onBack: () => void }) => (
-    <SubPageLayout onBack={onBack} tag="Portfolio" title="Impact Case Studies." description="Scalable infrastructure projects across the southern industrial corridor.">
-      <div className="grid md:grid-cols-2 gap-12">
+    <SubPageLayout onBack={onBack} tag="Portfolio" title="Impact Case Studies." description="Scalable infrastructure projects across the southern corridor.">
+      <div className="grid md:grid-cols-2 gap-8">
         {[{t:"Energy Grid", d:"MV/HV Substation deployment.", i:"https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800"}, {t:"Smart Fiber", d:"2,500km backbone deployment.", i:"https://images.unsplash.com/photo-1551703599-6b3e8379aa8c?q=80&w=800"}].map((p, i) => (
-          <div key={i} className="group relative h-[450px] overflow-hidden rounded-[3rem] shadow-xl">
+          <div key={i} className="group relative h-[380px] overflow-hidden rounded-[2.5rem] shadow-lg">
             <img src={p.i} alt={p.t} className="absolute inset-0 w-full h-full object-cover brightness-75 group-hover:scale-105 transition-transform duration-700" />
-            <div className="absolute inset-0 p-12 flex flex-col justify-end text-white z-10 pointer-events-none">
-              <h3 className={UI_CLASSES.cardTitle + " mb-4 group-hover:text-brand-cyan transition-colors"}>{p.t}</h3><p className="text-white/60 text-sm font-medium">{p.d}</p>
+            <div className="absolute inset-0 p-10 flex flex-col justify-end text-white z-10 pointer-events-none">
+              <h3 className={UI_CLASSES.cardTitle + " mb-2 group-hover:text-brand-cyan transition-colors"}>{p.t}</h3><p className="text-white/60 text-xs font-medium">{p.d}</p>
             </div>
           </div>
         ))}
@@ -377,11 +376,11 @@ const CorporatePages = {
     </SubPageLayout>
   ),
   Presence: ({ onBack }: { onBack: () => void }) => (
-    <SubPageLayout onBack={onBack} tag="Global Presence" title="Localized Precision." description="Regional hubs ensuring rapid deployment and 24/7 technical oversight.">
-      <div className="grid md:grid-cols-4 gap-8">
+    <SubPageLayout onBack={onBack} tag="Global Presence" title="Localized Precision." description="Regional hubs ensuring rapid deployment and technical oversight.">
+      <div className="grid md:grid-cols-4 gap-6">
         {[{c:"Addis Ababa", t:"HQ & Design"}, {c:"Bahir Dar", t:"Northern Hub"}, {c:"Dire Dawa", t:"Logistics Hub"}, {c:"Mekelle", t:"Support Center"}].map((o, i) => (
-          <div key={i} className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm text-center">
-            <MapPin size={32} className="text-brand-blue mx-auto mb-6" /><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-2"}>{o.c}</h3><p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">{o.t}</p>
+          <div key={i} className="p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm text-center">
+            <MapPin size={28} className="text-brand-blue mx-auto mb-4" /><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-1"}>{o.c}</h3><p className="text-slate-400 text-[9px] font-bold uppercase tracking-widest">{o.t}</p>
           </div>
         ))}
       </div>
@@ -392,49 +391,49 @@ const CorporatePages = {
 // --- Infrastructure Subpages ---
 const InfrastructurePages = {
   Telecom: ({ onBack }: { onBack: () => void }) => (
-    <SubPageLayout onBack={onBack} tag="Telecom" title="Structural Telecom Excellence." description="Pioneering mission-critical communication networks nationwide.">
-      <div className="grid lg:grid-cols-3 gap-12">
+    <SubPageLayout onBack={onBack} tag="Telecom" title="Telecom Excellence." description="Pioneering mission-critical networks nationwide.">
+      <div className="grid lg:grid-cols-3 gap-8">
         {[{i:Tower, t:"Tower Works"}, {i:Radio, t:"Active Radio"}, {i:Layers, t:"Fiber Optic"}].map((item, i) => (
-          <div key={i} className="p-12 bg-white rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all"><item.i size={40} className="text-brand-blue mb-8" /><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-4"}>{item.t}</h3><p className="text-slate-500 text-sm font-medium leading-relaxed">Certified engineering for resilient high-altitude structures and signal integration.</p></div>
+          <div key={i} className="p-10 bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all"><item.i size={36} className="text-brand-blue mb-6" /><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-3"}>{item.t}</h3><p className="text-slate-500 text-xs font-medium leading-relaxed">Certified engineering for resilient structures and signal integration.</p></div>
         ))}
       </div>
     </SubPageLayout>
   ),
   Power: ({ onBack }: { onBack: () => void }) => (
-    <SubPageLayout onBack={onBack} tag="Power Systems" title="Stable Energy Grid." description="Robust power solutions from industrial substations to renewable solar microgrids.">
-      <div className="grid md:grid-cols-2 gap-24">
-        <div className="space-y-12">
-          <div className="p-10 bg-brand-charcoal text-white rounded-[3rem] shadow-2xl"><Zap size={32} className="text-brand-emerald mb-6" /><h3 className={UI_CLASSES.cardTitle + " mb-4"}>Electrification</h3><p className="text-white/60">MV/HV electrical system design for industrial manufacturing clusters.</p></div>
-          <div className="p-10 bg-brand-blue text-white rounded-[3rem] shadow-2xl"><BatteryCharging size={32} className="text-brand-cyan mb-6" /><h3 className={UI_CLASSES.cardTitle + " mb-4"}>Solar Microgrids</h3><p className="text-white/60">Hybrid solutions providing stability for remote off-grid operations.</p></div>
+    <SubPageLayout onBack={onBack} tag="Power Systems" title="Stable Energy Grid." description="Robust solutions from industrial substations to renewable microgrids.">
+      <div className="grid md:grid-cols-2 gap-12">
+        <div className="space-y-8">
+          <div className="p-8 bg-brand-charcoal text-white rounded-[2rem] shadow-xl"><Zap size={28} className="text-brand-emerald mb-4" /><h3 className={UI_CLASSES.cardTitle + " mb-2"}>Electrification</h3><p className="text-white/50 text-xs">MV/HV system design for industrial clusters.</p></div>
+          <div className="p-8 bg-brand-blue text-white rounded-[2rem] shadow-xl"><BatteryCharging size={28} className="text-brand-cyan mb-4" /><h3 className={UI_CLASSES.cardTitle + " mb-2"}>Solar Microgrids</h3><p className="text-white/50 text-xs">Hybrid solutions for remote off-grid operations.</p></div>
         </div>
-        <div className="bg-white rounded-[4rem] p-16 border border-slate-100 flex flex-col justify-center"><h3 className="text-3xl font-black text-brand-charcoal mb-8">Technical Proficiency</h3><ul className="space-y-6">{["Switchgear Supply", "HV Transformer O&M", "Automation Panels", "Lightning Protection"].map(t => <li key={t} className="flex items-center gap-4 text-slate-500 font-bold"><CheckCircle2 className="text-brand-emerald" size={20} />{t}</li>)}</ul></div>
+        <div className="bg-white rounded-[3rem] p-12 border border-slate-100 flex flex-col justify-center"><h3 className="text-2xl font-black text-brand-charcoal mb-6">Technical Proficiency</h3><ul className="space-y-4">{["Switchgear Supply", "HV Transformer O&M", "Automation Panels", "Lightning Protection"].map(t => <li key={t} className="flex items-center gap-3 text-slate-500 font-bold text-sm"><CheckCircle2 className="text-brand-emerald" size={18} />{t}</li>)}</ul></div>
       </div>
     </SubPageLayout>
   ),
   OM: ({ onBack }: { onBack: () => void }) => (
-    <SubPageLayout onBack={onBack} tag="O&M" title="Zero-Failure Ops." description="Maintaining 99.9% uptime for national infrastructure through 24/7 field service.">
-      <div className="grid lg:grid-cols-4 gap-8">
+    <SubPageLayout onBack={onBack} tag="O&M" title="Zero-Failure Ops." description="Maintaining 99.9% uptime through 24/7 field service.">
+      <div className="grid lg:grid-cols-4 gap-6">
         {[{i:Activity, l:"Monitoring"}, {i:Settings, l:"Audit"}, {i:Zap, l:"Logistics"}, {i:Radio, l:"Radio O&M"}].map((s, i) => (
-          <div key={i} className="p-10 bg-white rounded-[2.5rem] border border-slate-100 text-center shadow-sm hover:border-brand-blue transition-colors">
-            <s.i size={32} className="text-brand-blue mx-auto mb-6" /><h3 className="font-black text-brand-charcoal uppercase tracking-widest text-xs">{s.l}</h3>
+          <div key={i} className="p-8 bg-white rounded-[2rem] border border-slate-100 text-center shadow-sm hover:border-brand-blue transition-colors">
+            <s.i size={28} className="text-brand-blue mx-auto mb-4" /><h3 className="font-black text-brand-charcoal uppercase tracking-widest text-[10px]">{s.l}</h3>
           </div>
         ))}
       </div>
     </SubPageLayout>
   ),
   Network: ({ onBack }: { onBack: () => void }) => (
-    <SubPageLayout onBack={onBack} tag="Rollout" title="Network Expansion." description="Accelerating the implementation of 4G/5G networks to bridge the digital divide.">
-       <div className="rounded-[4rem] bg-brand-charcoal overflow-hidden text-white flex flex-col md:flex-row h-[500px]">
-          <div className="md:w-1/2 p-24 flex flex-col justify-center"><h2 className="text-4xl font-black mb-8 tracking-tighter">Carrier Implementation</h2><p className="text-white/40 text-lg leading-relaxed mb-12">Handling everything from site acquisition to technical commissioning for global carrier clients.</p></div>
+    <SubPageLayout onBack={onBack} tag="Rollout" title="Network Expansion." description="Accelerating the implementation of 4G/5G networks.">
+       <div className="rounded-[3rem] bg-brand-charcoal overflow-hidden text-white flex flex-col md:flex-row h-[420px]">
+          <div className="md:w-1/2 p-16 flex flex-col justify-center"><h2 className="text-3xl font-black mb-6 tracking-tighter">Carrier Implementation</h2><p className="text-white/40 text-base leading-relaxed mb-8">Handling acquisition to technical commissioning for global carriers.</p></div>
           <div className="md:w-1/2 h-full"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800" className="w-full h-full object-cover" alt="Net" /></div>
        </div>
     </SubPageLayout>
   ),
   EnergyMgmt: ({ onBack }: { onBack: () => void }) => (
-    <SubPageLayout onBack={onBack} tag="Energy" title="Intelligent Efficiency." description="Fusing IoT and automation to minimize power consumption and environmental footprint.">
-      <div className="grid md:grid-cols-3 gap-12">
+    <SubPageLayout onBack={onBack} tag="Energy" title="Intelligent Efficiency." description="IoT and automation to minimize environmental footprint.">
+      <div className="grid md:grid-cols-3 gap-8">
         {[{i:BarChart3, t:"Analytics"}, {i:Cpu, t:"Controllers"}, {i:Target, t:"Green Footprint"}].map((s, i) => (
-          <div key={i} className="p-12 bg-white rounded-[3rem] border border-slate-100 flex flex-col shadow-sm"><s.i size={32} className="text-brand-blue mb-8" /><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-4"}>{s.t}</h3><p className="text-slate-400 font-medium">Modeling leakage and consumption to optimize operational spend.</p></div>
+          <div key={i} className="p-10 bg-white rounded-[2rem] border border-slate-100 flex flex-col shadow-sm"><s.i size={28} className="text-brand-blue mb-6" /><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-3"}>{s.t}</h3><p className="text-slate-400 font-medium text-xs">Modeling consumption to optimize operational spend.</p></div>
         ))}
       </div>
     </SubPageLayout>
@@ -445,10 +444,10 @@ const InfrastructurePages = {
 const SubContentGrids = {
   Innovation: (onBack: () => void, tag: string, title: string, desc: string, icon1: any, icon2: any, icon3: any) => (
     <SubPageLayout onBack={onBack} tag={tag} title={title} description={desc} color="text-brand-cyan">
-       <div className="grid md:grid-cols-3 gap-12">
+       <div className="grid md:grid-cols-3 gap-8">
           {[icon1, icon2, icon3].map((Icon, i) => (
-            <div key={i} className="p-12 bg-white rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all">
-              <Icon size={48} className="text-brand-cyan mb-8" /><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-4"}>Core Solution {i+1}</h3><p className="text-slate-500 font-medium">Scaling digital infrastructure with next-gen AI and interconnected compute nodes.</p>
+            <div key={i} className="p-10 bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all">
+              <Icon size={40} className="text-brand-cyan mb-6" /><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-3"}>Core Solution {i+1}</h3><p className="text-slate-500 font-medium text-xs">Scaling digital infrastructure with next-gen AI and connected compute.</p>
             </div>
           ))}
        </div>
@@ -456,10 +455,10 @@ const SubContentGrids = {
   ),
   Excellence: (onBack: () => void, tag: string, title: string, desc: string, icon1: any, icon2: any, icon3: any) => (
     <SubPageLayout onBack={onBack} tag={tag} title={title} description={desc} color="text-brand-emerald">
-       <div className="grid md:grid-cols-3 gap-12">
+       <div className="grid md:grid-cols-3 gap-8">
           {[icon1, icon2, icon3].map((Icon, i) => (
-            <div key={i} className="p-12 bg-white rounded-[3rem] border border-slate-100 shadow-sm hover:border-brand-emerald/20 transition-all">
-              <Icon size={48} className="text-brand-emerald mb-8" /><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-4"}>Standard Pillar {i+1}</h3><p className="text-slate-500 font-medium">Validating leadership through rigorous audits and world-class technical certification.</p>
+            <div key={i} className="p-10 bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:border-brand-emerald/20 transition-all">
+              <Icon size={40} className="text-brand-emerald mb-6" /><h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-3"}>Standard Pillar {i+1}</h3><p className="text-slate-500 font-medium text-xs">Validating leadership through rigorous audits and world-class technical certification.</p>
             </div>
           ))}
        </div>
@@ -521,26 +520,34 @@ const App = () => {
       default: return (
         <>
           <HeroSlider onOpenContact={() => setIsContactOpen(true)} />
+          {/* Trust Bar sticky bottom marquee implementation */}
           <ClientTrustBar />
-          <section className="py-24 bg-white overflow-hidden">
-             <div className="container mx-auto px-6 mb-12 flex items-center gap-4"><LogoSymbol className="w-8 h-8 opacity-40" /><span className={UI_CLASSES.tag + " text-brand-charcoal/30"}>Strategic Delivery Network</span></div>
-             <div className="flex gap-28 items-center animate-marquee whitespace-nowrap opacity-[0.15] hover:opacity-[0.8] transition-opacity duration-700">{TRUST_PARTNERS.concat(TRUST_PARTNERS).map((n, i) => (<span key={i} className="text-6xl font-black text-brand-charcoal tracking-tighter uppercase">{n}</span>))}</div>
+          
+          <section className="py-16 bg-white overflow-hidden border-b border-slate-50">
+             <div className="container mx-auto px-6 mb-8 flex items-center gap-3"><LogoSymbol className="w-6 h-6 opacity-30" /><span className={UI_CLASSES.tag + " text-brand-charcoal/30"}>Strategic Delivery Network</span></div>
+             <div className="flex gap-20 items-center animate-marquee whitespace-nowrap opacity-[0.1] hover:opacity-[0.8] transition-opacity duration-700">{TRUST_PARTNERS.concat(TRUST_PARTNERS).map((n, i) => (<span key={i} className="text-4xl md:text-5xl font-black text-brand-charcoal tracking-tighter uppercase">{n}</span>))}</div>
           </section>
           
-          <section id="infrastructure" className="py-48 bg-white border-b border-slate-50">
+          <section id="infrastructure" className="py-24 bg-white">
             <div className="container mx-auto px-6">
-               <div className="flex flex-col lg:flex-row justify-between items-end mb-32 gap-16"><div className="max-w-2xl"><span className={`text-brand-blue ${UI_CLASSES.tag} mb-8`}>Pillar I</span><h2 className={`${UI_CLASSES.sectionTitle} text-brand-charcoal`}>Structural <br/> Infrastructure.</h2></div><p className={`text-slate-500 max-w-sm ${UI_CLASSES.bodyLarge}`}>National connectivity and power systems.</p></div>
-               <div className="grid md:grid-cols-2 gap-12">
+               <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-10">
+                 <div className="max-w-2xl"><span className={`text-brand-blue ${UI_CLASSES.tag} mb-6`}>Pillar I</span><h2 className={`${UI_CLASSES.sectionTitle} text-brand-charcoal`}>Structural <br/> Infrastructure.</h2></div>
+                 <p className={`text-slate-500 max-w-sm ${UI_CLASSES.bodyLarge}`}>National connectivity and power systems engineered for resilience.</p>
+               </div>
+               <div className="grid md:grid-cols-2 gap-10">
                  <ServiceCard title="Telecom Systems" icon={Radio} color="bg-brand-blue" items={["Tower Civil Works", "Mobile Network Rollout"]} onClick={() => navigateTo('telecom')} />
                  <ServiceCard title="Power & Energy" icon={Zap} color="bg-brand-charcoal" items={["Industrial Electrification", "Solar Microgrids"]} onClick={() => navigateTo('power')} />
                </div>
             </div>
           </section>
 
-          <section id="innovation" className="py-48 bg-slate-50">
+          <section id="innovation" className="py-24 bg-slate-50">
             <div className="container mx-auto px-6">
-              <div className="flex flex-col lg:flex-row justify-between items-end mb-32 gap-16"><div className="max-w-2xl"><span className={`text-brand-cyan ${UI_CLASSES.tag} mb-8`}>Pillar II</span><h2 className={`${UI_CLASSES.sectionTitle} text-brand-charcoal`}>Digital <br/> Convergence.</h2></div><p className={`text-slate-500 max-sm ${UI_CLASSES.bodyLarge}`}>Fusing hardware with intelligence.</p></div>
-              <div className="grid md:grid-cols-3 gap-10">
+              <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-10">
+                <div className="max-w-2xl"><span className={`text-brand-cyan ${UI_CLASSES.tag} mb-6`}>Pillar II</span><h2 className={`${UI_CLASSES.sectionTitle} text-brand-charcoal`}>Digital <br/> Convergence.</h2></div>
+                <p className={`text-slate-500 max-sm ${UI_CLASSES.bodyLarge}`}>Fusing industrial hardware with next-gen intelligence.</p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-8">
                 <ServiceCard title="ICT Systems" icon={Server} color="bg-brand-blue" items={["Data Centers", "Enterprise Networks"]} onClick={() => navigateTo('ict')} />
                 <ServiceCard title="Smart AI" icon={Cpu} color="bg-brand-cyan" items={["IoT Integrations", "Predictive Ops"]} onClick={() => navigateTo('ai-iot')} />
                 <ServiceCard title="Vertical Mobility" icon={Layers} color="bg-slate-400" items={["Elevator Systems", "Traffic Analytics"]} onClick={() => navigateTo('mobility')} />
@@ -548,21 +555,35 @@ const App = () => {
             </div>
           </section>
 
-          <section id="excellence" className="py-48 bg-white overflow-hidden">
+          <section id="excellence" className="py-24 bg-white overflow-hidden">
             <div className="container mx-auto px-6">
-              <div className="max-w-4xl mb-32"><span className={`text-brand-emerald ${UI_CLASSES.tag} mb-8`}>Pillar III</span><h2 className={`${UI_CLASSES.sectionTitle} text-brand-charcoal mb-12`}>The Integrity <br/> Framework.</h2></div>
-              <div className="bg-brand-charcoal rounded-[4rem] overflow-hidden grid lg:grid-cols-5 shadow-2xl">
-                <div className="lg:col-span-2 min-h-[550px] flex flex-col items-center justify-center p-16 bg-gradient-to-br from-brand-charcoal to-slate-900">
-                  <AnimatePresence mode="wait"><motion.div key={activeISO} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="w-72 h-72 bg-white rounded-full p-12 shadow-2xl flex flex-col items-center justify-center relative"><span className="text-[10px] font-black tracking-[0.3em] text-brand-charcoal/40 uppercase mb-2">Certified</span><span className="text-5xl font-black text-brand-charcoal tracking-tighter">ISO {activeISO}</span></motion.div></AnimatePresence>
+              <div className="max-w-3xl mb-16"><span className={`text-brand-emerald ${UI_CLASSES.tag} mb-6`}>Pillar III</span><h2 className={`${UI_CLASSES.sectionTitle} text-brand-charcoal mb-8`}>The Integrity Framework.</h2></div>
+              <div className="bg-brand-charcoal rounded-[3rem] overflow-hidden grid lg:grid-cols-5 shadow-xl">
+                <div className="lg:col-span-2 min-h-[450px] flex flex-col items-center justify-center p-12 bg-gradient-to-br from-brand-charcoal to-slate-900">
+                  <AnimatePresence mode="wait"><motion.div key={activeISO} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-64 h-64 bg-white rounded-full p-10 shadow-xl flex flex-col items-center justify-center relative"><span className="text-[9px] font-black tracking-[0.2em] text-brand-charcoal/40 uppercase mb-2">Certified</span><span className="text-4xl font-black text-brand-charcoal tracking-tighter">ISO {activeISO}</span></motion.div></AnimatePresence>
                 </div>
-                <div className="lg:col-span-3 p-12 md:p-24 bg-white/5 divide-y divide-white/10">{ISO_DATA.map((iso) => (<div key={iso.id} className="py-10 cursor-pointer group" onClick={() => setActiveISO(iso.id)}><div className="flex items-center justify-between"><div className="flex items-center gap-10"><div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${activeISO === iso.id ? 'bg-brand-emerald text-brand-charcoal' : 'bg-white/5 text-white/20'}`}><CheckCircle2 size={32} /></div><h3 className={`text-3xl md:text-5xl font-black tracking-tighter ${activeISO === iso.id ? 'text-white' : 'text-white/20'}`}>{iso.title}</h3></div><ChevronDown size={36} className={`transition-all ${activeISO === iso.id ? 'rotate-180 text-brand-emerald' : 'text-white/10'}`} /></div>{activeISO === iso.id && <p className="text-white/40 text-xl leading-relaxed font-bold mt-10 pl-24">{iso.description}</p>}</div>))}</div>
+                <div className="lg:col-span-3 p-10 md:p-16 bg-white/5 divide-y divide-white/5">{ISO_DATA.map((iso) => (<div key={iso.id} className="py-8 cursor-pointer group" onClick={() => setActiveISO(iso.id)}><div className="flex items-center justify-between"><div className="flex items-center gap-8"><div className={`w-12 h-12 rounded-xl flex items-center justify-center ${activeISO === iso.id ? 'bg-brand-emerald text-brand-charcoal' : 'bg-white/5 text-white/10'}`}><CheckCircle2 size={24} /></div><h3 className={`text-2xl md:text-3xl font-black tracking-tighter ${activeISO === iso.id ? 'text-white' : 'text-white/20'}`}>{iso.title}</h3></div><ChevronDown size={28} className={`transition-all ${activeISO === iso.id ? 'rotate-180 text-brand-emerald' : 'text-white/5'}`} /></div>{activeISO === iso.id && <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="text-white/40 text-base leading-relaxed font-bold mt-6 pl-20">{iso.description}</motion.p>}</div>))}</div>
               </div>
             </div>
           </section>
 
-          <section className="py-48 bg-brand-charcoal text-white relative z-10 text-center"><div className="container mx-auto px-6 grid md:grid-cols-4 gap-24">{[{l:"Managed Chapters", v:3}, {l:"Field Staff", v:120, s:"+"}, {l:"Projects Done", v:450, s:"+"}, {l:"Uptime Rate", v:99.9, s:"%"}].map((st, i) => (<div key={i}><div className="text-8xl font-black mb-5 tracking-tighter leading-none"><CountUp value={st.v} suffix={st.s || ""} /></div><p className="text-brand-cyan/40 font-black uppercase text-[10px] tracking-[0.4em]">{st.l}</p></div>))}</div></section>
+          <section className="py-24 bg-brand-charcoal text-white relative z-10 text-center">
+            <div className="container mx-auto px-6 grid md:grid-cols-4 gap-16">
+              {[{l:"Chapters", v:3}, {l:"Field Staff", v:120, s:"+"}, {l:"Projects", v:450, s:"+"}, {l:"Uptime", v:99.9, s:"%"}].map((st, i) => (
+                <div key={i}>
+                  <div className="text-6xl font-black mb-3 tracking-tighter leading-none"><CountUp value={st.v} suffix={st.s || ""} /></div>
+                  <p className="text-brand-cyan/40 font-black uppercase text-[9px] tracking-[0.3em]">{st.l}</p>
+                </div>
+              ))}
+            </div>
+          </section>
           
-          <section className="py-64 bg-white text-center"><div className="container mx-auto px-6"><h2 className={UI_CLASSES.displayLarge + " text-brand-charcoal mb-24"}>Precise Engineering. <br/> Without Limits.</h2><button onClick={() => setIsContactOpen(true)} className="bg-brand-blue text-white px-20 py-10 rounded-3xl font-black tracking-widest text-[12px] shadow-2xl hover:scale-105 transition-all uppercase">Partner With Us</button></div></section>
+          <section className="py-32 bg-white text-center">
+            <div className="container mx-auto px-6">
+              <h2 className={UI_CLASSES.displayLarge + " text-brand-charcoal mb-16"}>Precise Engineering. <br/> Without Limits.</h2>
+              <button onClick={() => setIsContactOpen(true)} className="bg-brand-blue text-white px-16 py-8 rounded-2xl font-black tracking-widest text-[11px] shadow-2xl hover:scale-105 transition-all uppercase">Partner With Us</button>
+            </div>
+          </section>
         </>
       );
     }
@@ -574,7 +595,7 @@ const App = () => {
       <header className="fixed top-0 left-0 w-full h-[36px] bg-brand-emerald z-[120] flex items-center justify-center overflow-hidden border-b border-black/5">
         <div className="container mx-auto px-6 flex items-center justify-center gap-4 text-brand-charcoal font-black text-[10px] tracking-[0.1em] uppercase"><LogoSymbol className="w-4 h-4" /><p>ISO 27001 Security Excellence Certified</p></div>
       </header>
-      <header className={`fixed top-[36px] left-0 w-full z-[100] transition-all duration-500 border-b ${isScrolled ? 'bg-[#001E3C]/95 border-white/10 shadow-2xl py-4 backdrop-blur-md' : 'bg-transparent border-transparent py-8'}`}>
+      <header className={`fixed top-[36px] left-0 w-full z-[100] transition-all duration-500 border-b ${isScrolled ? 'bg-[#001E3C]/95 border-white/10 shadow-2xl py-3 backdrop-blur-md' : 'bg-transparent border-transparent py-6'}`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Brand forceInvert={true} onClick={() => navigateTo('home')} />
           <nav className="hidden lg:flex items-center gap-1">
@@ -583,31 +604,14 @@ const App = () => {
               const dropdownPosition = idx === 0 ? 'left-0' : (idx === 1 ? 'left-1/2 -translate-x-1/2' : (idx === 2 ? 'left-1/2 -translate-x-1/2' : 'right-0'));
               
               return (
-                <div 
-                  key={nav.label} 
-                  className="relative px-3 py-2 group" 
-                  onMouseEnter={() => setActiveMenu(nav.label)} 
-                  onMouseLeave={() => setActiveMenu(null)}
-                >
-                  {/* Main Nav Item: Snappy brand-cyan color transition */}
+                <div key={nav.label} className="relative px-3 py-2 group" onMouseEnter={() => setActiveMenu(nav.label)} onMouseLeave={() => setActiveMenu(null)}>
                   <div className={`flex items-center gap-1.5 cursor-pointer text-[11px] font-black tracking-[0.2em] transition-all duration-300 uppercase drop-shadow-md ${isHovered ? 'text-brand-cyan' : 'text-white/80 hover:text-white'}`}>
                     {nav.label} 
-                    {/* Synchronized Chevron Rotation */}
-                    <ChevronDown 
-                      size={12} 
-                      className={`transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isHovered ? 'rotate-180 text-brand-cyan scale-110' : 'opacity-40 group-hover:opacity-100'}`} 
-                    />
+                    <ChevronDown size={12} className={`transition-all duration-300 ease-out ${isHovered ? 'rotate-180 text-brand-cyan scale-110' : 'opacity-40 group-hover:opacity-100'}`} />
                   </div>
                   <AnimatePresence>
                     {isHovered && (
-                      <motion.div 
-                        initial={{ opacity: 0, y: 8, scale: 0.98 }} 
-                        animate={{ opacity: 1, y: 0, scale: 1 }} 
-                        exit={{ opacity: 0, y: 8, scale: 0.98 }} 
-                        transition={{ duration: 0.2, ease: "easeOut" }}
-                        className={`absolute top-full mt-2 w-[420px] max-w-[calc(100vw-2rem)] bg-white shadow-[0_30px_60px_-12px_rgba(0,0,0,0.35)] rounded-[1rem] overflow-hidden grid grid-cols-12 border border-slate-100/50 z-[110] ${dropdownPosition}`}
-                      >
-                        {/* Compact Scaled-Down Overview Panel */}
+                      <motion.div initial={{ opacity: 0, y: 8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.98 }} transition={{ duration: 0.2 }} className={`absolute top-full mt-2 w-[420px] max-w-[calc(100vw-2rem)] bg-white shadow-2xl rounded-[1rem] overflow-hidden grid grid-cols-12 border border-slate-100/50 z-[110] ${dropdownPosition}`}>
                         <div className="col-span-5 bg-[#001E3C] p-6 text-white relative overflow-hidden flex flex-col justify-between">
                           <div className="relative z-10">
                             <span className="text-[7.5px] font-black uppercase tracking-[0.2em] text-brand-cyan mb-2.5 block">{nav.overview.tag}</span>
@@ -618,19 +622,11 @@ const App = () => {
                             <span className="border-b border-white/10 group-hover:border-brand-cyan transition-colors pb-0.5">{nav.overview.cta}</span>
                             <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform" />
                           </button>
-                          {/* Subdued Watermark Logo */}
-                          <LogoSymbol className="absolute -bottom-4 -right-4 w-24 h-24 opacity-[0.02] pointer-events-none" forceInvert={true} />
                         </div>
-                        
-                        {/* Compact Items Panel: scaled down for modern hierarchy */}
                         <div className="col-span-7 p-3.5 bg-white">
                           <div className="grid grid-cols-1 gap-0.5">
                             {nav.items.map((item, i) => (
-                              <button 
-                                key={i} 
-                                onClick={() => navigateTo(item.page as PageID)} 
-                                className="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-slate-50 text-slate-600 hover:text-brand-blue group transition-all"
-                              >
+                              <button key={i} onClick={() => navigateTo(item.page as PageID)} className="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-slate-50 text-slate-600 hover:text-brand-blue group transition-all">
                                 <div className="flex flex-col text-left">
                                   <span className="font-bold text-[11px] tracking-tight leading-none mb-0.5">{item.label}</span>
                                   <span className="text-[6.5px] font-black text-slate-300 uppercase tracking-[0.15em]">{item.category}</span>
@@ -662,11 +658,11 @@ const App = () => {
                  <Brand forceInvert={true} onClick={() => navigateTo('home')} className="scale-90 origin-left" />
                  <button onClick={() => setIsMobileOpen(false)} className="p-3 bg-white/5 hover:bg-white/10 rounded-2xl transition-all text-brand-cyan active:scale-90" aria-label="Close menu"><X size={32} /></button>
                </div>
-               <nav className="flex-grow overflow-y-auto p-8 space-y-12">
+               <nav className="flex-grow overflow-y-auto p-8 space-y-10">
                   {NAV_CONFIG.map(cat => (
-                    <div key={cat.label} className="space-y-6">
+                    <div key={cat.label} className="space-y-4">
                       <div className="flex items-center gap-3"><cat.icon size={14} className="text-brand-cyan/40" /><span className="text-[10px] font-black uppercase text-brand-cyan/40 tracking-[0.4em]">{cat.label}</span></div>
-                      <div className="grid gap-3 pl-4 border-l border-white/5">{cat.items.map(item => (<button key={item.label} onClick={() => navigateTo(item.page as PageID)} className="text-lg font-bold text-left text-white/70 hover:text-brand-cyan transition-all py-1 flex items-center justify-between group">{item.label}<ChevronRight size={16} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" /></button>))}</div>
+                      <div className="grid gap-2 pl-4 border-l border-white/5">{cat.items.map(item => (<button key={item.label} onClick={() => navigateTo(item.page as PageID)} className="text-lg font-bold text-left text-white/70 hover:text-brand-cyan transition-all py-1 flex items-center justify-between group">{item.label}<ChevronRight size={16} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" /></button>))}</div>
                     </div>
                   ))}
                </nav>
@@ -680,14 +676,14 @@ const App = () => {
         <AnimatePresence mode="wait"><motion.div key={currentPage} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>{renderContent()}</motion.div></AnimatePresence>
       </main>
 
-      <footer className="bg-brand-charcoal text-white pt-48 pb-24">
+      <footer className="bg-brand-charcoal text-white pt-32 pb-16">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-4 gap-24 mb-48">
-            <div className="col-span-2 space-y-16"><Brand onClick={() => navigateTo('home')} /><p className="text-white/40 text-3xl max-w-lg leading-snug font-bold">Leading the transition to digital-first infrastructure through excellence.</p></div>
-            <div className="space-y-12"><h5 className="font-black text-white/30 uppercase text-[10px] tracking-[0.5em]">HQ Addis</h5><ul className="space-y-8 text-white/50 text-base font-bold"><li className="flex gap-4"><MapPin className="text-brand-cyan" size={24} /><span>Senior Gete Bldg, 3rd Floor</span></li><li className="flex gap-4"><Phone className="text-brand-cyan" size={24} /><span>+251 11 635 4312</span></li></ul></div>
-            <div className="space-y-12"><h5 className="font-black text-white/30 uppercase text-[10px] tracking-[0.5em]">Links</h5><ul className="space-y-6 text-white/50 text-base font-bold"><li className="hover:text-white cursor-pointer" onClick={() => navigateTo('home', '#infrastructure')}>Infrastructure</li><li className="hover:text-white cursor-pointer" onClick={() => navigateTo('home', '#innovation')}>Innovation</li><li className="hover:text-white cursor-pointer" onClick={() => navigateTo('home', '#excellence')}>Academy</li></ul></div>
+          <div className="grid lg:grid-cols-4 gap-16 mb-24">
+            <div className="col-span-2 space-y-10"><Brand onClick={() => navigateTo('home')} /><p className="text-white/40 text-2xl max-w-lg leading-snug font-bold">Pioneering Ethiopia's modern infrastructure through precision engineering.</p></div>
+            <div className="space-y-8"><h5 className="font-black text-white/20 uppercase text-[9px] tracking-[0.4em]">HQ Addis</h5><ul className="space-y-6 text-white/50 text-sm font-bold"><li className="flex gap-4"><MapPin className="text-brand-cyan" size={20} /><span>Senior Gete Bldg, 3rd Floor</span></li><li className="flex gap-4"><Phone className="text-brand-cyan" size={20} /><span>+251 11 635 4312</span></li></ul></div>
+            <div className="space-y-8"><h5 className="font-black text-white/20 uppercase text-[9px] tracking-[0.4em]">Links</h5><ul className="space-y-4 text-white/50 text-sm font-bold"><li className="hover:text-white cursor-pointer" onClick={() => navigateTo('home', '#infrastructure')}>Infrastructure</li><li className="hover:text-white cursor-pointer" onClick={() => navigateTo('home', '#innovation')}>Innovation</li><li className="hover:text-white cursor-pointer" onClick={() => navigateTo('home', '#excellence')}>Academy</li></ul></div>
           </div>
-          <div className="pt-24 border-t border-white/5 flex flex-col md:flex-row justify-between text-[10px] font-black text-white/10 uppercase tracking-[0.6em]"><div>© 2025 InfinEth Solutions.</div><div className="flex gap-12"><span>Telecom</span><span>Power</span><span>ICT</span></div></div>
+          <div className="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between text-[9px] font-black text-white/10 uppercase tracking-[0.5em]"><div>© 2025 InfinEth Solutions.</div><div className="flex gap-8"><span>Telecom</span><span>Power</span><span>ICT</span></div></div>
         </div>
       </footer>
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
@@ -696,11 +692,11 @@ const App = () => {
 };
 
 const ServiceCard = ({ title, items, icon: Icon, color, onClick }: { title: string, items: string[], icon: any, color: string, onClick?: () => void }) => (
-  <motion.div whileHover={{ y: -10 }} onClick={onClick} className={`p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col h-full group`}>
-    <div className={`${color} w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-10 group-hover:rotate-12 transition-transform shadow-xl`}><Icon size={32} /></div>
-    <h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-8"}>{title}</h3>
-    <ul className="space-y-4 mb-10 flex-grow">{items.map((item, idx) => (<li key={idx} className="flex items-start gap-3 text-slate-500 text-sm font-bold leading-relaxed"><div className="w-1.5 h-1.5 rounded-full bg-brand-cyan/40 mt-2 shrink-0"></div>{item}</li>))}</ul>
-    <div className="flex items-center gap-2 text-brand-blue font-black text-[10px] tracking-widest uppercase mt-auto">Details <ArrowRight size={16} /></div>
+  <motion.div whileHover={{ y: -8 }} onClick={onClick} className={`p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col h-full group`}>
+    <div className={`${color} w-14 h-14 rounded-xl flex items-center justify-center text-white mb-8 group-hover:rotate-6 transition-transform shadow-lg`}><Icon size={28} /></div>
+    <h3 className={UI_CLASSES.cardTitle + " text-brand-charcoal mb-6"}>{title}</h3>
+    <ul className="space-y-3 mb-8 flex-grow">{items.map((item, idx) => (<li key={idx} className="flex items-start gap-2.5 text-slate-500 text-sm font-bold leading-relaxed"><div className="w-1.5 h-1.5 rounded-full bg-brand-cyan/40 mt-1.5 shrink-0"></div>{item}</li>))}</ul>
+    <div className="flex items-center gap-2 text-brand-blue font-black text-[9px] tracking-widest uppercase mt-auto">Details <ArrowRight size={14} /></div>
   </motion.div>
 );
 
@@ -708,18 +704,18 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   <AnimatePresence>
     {isOpen && (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[300] flex items-center justify-center p-6 bg-brand-charcoal/95 backdrop-blur-xl">
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative w-full max-w-4xl bg-white rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-2xl h-[90vh] md:h-auto">
-          <button onClick={onClose} className="absolute top-8 right-8 z-10 p-3 bg-slate-100 rounded-2xl"><X size={24} /></button>
-          <div className="hidden md:flex md:w-5/12 bg-brand-charcoal p-16 text-white flex-col justify-between"><Brand /><h2 className="text-4xl font-black tracking-tighter mb-12">Start Your <br/><span className="text-brand-cyan">Next Project.</span></h2><div className="space-y-6 text-white/40 text-sm font-bold"><p>Direct: +251 11 635 4312</p><p>hello@infineth.com</p></div></div>
-          <div className="w-full md:w-7/12 p-16 bg-white overflow-y-auto">
-            <h3 className="text-3xl font-black mb-12 text-brand-charcoal">Inquiry Form</h3>
-            <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); onClose(); }}>
-              <div className="grid gap-8">
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-1">Full Name</label><input type="text" className="w-full bg-slate-50 p-6 rounded-2xl outline-none font-bold text-brand-charcoal" required /></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-1">Email</label><input type="email" className="w-full bg-slate-50 p-6 rounded-2xl outline-none font-bold text-brand-charcoal" required /></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-1">Project Particulars</label><textarea rows={4} className="w-full bg-slate-50 p-6 rounded-2xl outline-none resize-none font-bold text-brand-charcoal" required></textarea></div>
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative w-full max-w-4xl bg-white rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-2xl h-[90vh] md:h-auto">
+          <button onClick={onClose} className="absolute top-6 right-6 z-10 p-2.5 bg-slate-100 rounded-xl"><X size={20} /></button>
+          <div className="hidden md:flex md:w-5/12 bg-brand-charcoal p-12 text-white flex-col justify-between"><Brand /><h2 className="text-3xl font-black tracking-tighter mb-10">Start Your <br/><span className="text-brand-cyan">Next Project.</span></h2><div className="space-y-4 text-white/40 text-xs font-bold"><p>+251 11 635 4312</p><p>hello@infineth.com</p></div></div>
+          <div className="w-full md:w-7/12 p-12 bg-white overflow-y-auto">
+            <h3 className="text-2xl font-black mb-10 text-brand-charcoal">Inquiry Form</h3>
+            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); onClose(); }}>
+              <div className="grid gap-6">
+                <div className="space-y-2"><label className="text-[9px] font-black uppercase text-slate-400">Full Name</label><input type="text" className="w-full bg-slate-50 p-4 rounded-xl outline-none font-bold text-brand-charcoal" required /></div>
+                <div className="space-y-2"><label className="text-[9px] font-black uppercase text-slate-400">Email</label><input type="email" className="w-full bg-slate-50 p-4 rounded-xl outline-none font-bold text-brand-charcoal" required /></div>
+                <div className="space-y-2"><label className="text-[9px] font-black uppercase text-slate-400">Project Details</label><textarea rows={3} className="w-full bg-slate-50 p-4 rounded-xl outline-none resize-none font-bold text-brand-charcoal" required></textarea></div>
               </div>
-              <button type="submit" className="w-full bg-brand-blue text-white py-6 rounded-2xl font-black tracking-widest uppercase shadow-2xl shadow-brand-blue/20 hover:bg-brand-blue/90 transition-all">Initialize Consultation</button>
+              <button type="submit" className="w-full bg-brand-blue text-white py-5 rounded-xl font-black tracking-widest uppercase shadow-xl hover:bg-brand-blue/90 transition-all">Initialize</button>
             </form>
           </div>
         </motion.div>
