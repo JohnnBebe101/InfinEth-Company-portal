@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>InfinEth Solutions | Infinite Possibilities in Engineering & ICT</title>
+  <meta name="title" content="InfinEth Solutions | Infinite Possibilities in Engineering & ICT">
+  <meta name="description" content="Ethiopia's leading provider of Telecom Infrastructure, ICT Systems Design, and Electro-Mechanical Engineering. Delivering global quality standards through ISO-certified excellence.">
+  <meta name="keywords" content="InfinEth, Telecom Ethiopia, ICT Solutions Addis Ababa, Engineering Ethiopia, ISO Certified Engineering, Infrastructure Development">
+  <meta name="author" content="InfinEth Solutions">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://infineth.com/">
+  <meta property="og:title" content="InfinEth Solutions | Engineering Excellence">
+  <meta property="og:description" content="Pioneering modern infrastructure in Ethiopia through Telecom, Power, and ICT innovation. ISO 9001:2015 certified delivery.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1544654803-b69140b285a1?q=80&w=1200&auto=format&fit=crop">
+
+  <!-- Favicon: Updated to white line art interlocking logo -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M65.4 33.4C74.6 33.4 82 40.8 82 50C82 59.2 74.6 66.6 65.4 66.6L44.6 66.6C35.4 66.6 28 59.2 28 50C28 40.8 35.4 33.4 44.6 33.4L54 33.4' stroke='%23006699' stroke-width='10' stroke-linecap='round' fill='none'/><path d='M34.6 66.6C25.4 66.6 18 59.2 18 50C18 40.8 25.4 33.4 34.6 33.4L55.4 33.4C64.6 33.4 72 40.8 72 50C72 59.2 64.6 66.6 55.4 66.6L46 66.6' stroke='%2336454F' stroke-width='10' stroke-linecap='round' fill='none'/></svg>">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-blue': '#006699',
+            'brand-cyan': '#00CFFF',
+            'brand-charcoal': '#36454F',
+            'brand-emerald': '#34D399',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --charcoal: #36454F;
+      --blue-brand: #006699;
+      --cyan-accent: #00CFFF;
+      --emerald-accent: #34D399;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-display: swap;
+      scroll-behavior: smooth;
+    }
+    
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      animation: marquee 40s linear infinite;
+    }
+    
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f8fafc; }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--blue-brand); }
+
+    .section-cv {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 800px;
+    }
+    
+    .will-change-transform {
+      will-change: transform;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+
+<script type="importmap">
+{
+  "imports": {
+    "framer-motion": "https://esm.sh/framer-motion@^12.23.26",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+<body class="bg-slate-50 antialiased overflow-x-hidden">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
