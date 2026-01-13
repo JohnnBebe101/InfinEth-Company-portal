@@ -79,71 +79,72 @@ const UI_CLASSES = {
 // --- Constants & Config ---
 const NAV_CONFIG = [
   {
-    label: 'IDENTITY',
-    icon: Globe,
+    label: 'TELECOMMUNICATIONS',
+    icon: Radio,
     overview: {
-      title: "Who We Are",
-      description: "Ethiopia's premier infrastructure provider.",
-      cta: "Our History",
-      tag: "Corporate"
+      title: "Telecom Solutions",
+      description: "Pioneering end-to-end network rollout and resilient infrastructure.",
+      cta: "View Works",
+      tag: "Connectivity"
     },
     items: [
-      { label: 'Identity & Impact', page: 'identity', category: 'Corporate' },
-      { label: 'Leadership Team', page: 'leadership', category: 'Corporate' },
-      { label: 'Board of Directors', page: 'board', category: 'Corporate' },
-      { label: 'Impact Portfolio', page: 'portfolio-detailed', category: 'Corporate' },
-      { label: 'Global Presence', page: 'presence', category: 'Corporate' }
+      { label: 'Tower +', page: 'telecom', category: 'Infrastructure' },
+      { label: 'Civil Works', page: 'telecom', category: 'Infrastructure' },
+      { label: 'Mobile Telecom Rollout ((RAN) + Power) +', page: 'mobile-network', category: 'Rollout' },
+      { label: 'Fiber Optics', page: 'telecom', category: 'Transmission' },
+      { label: 'Sourcing +', page: 'presence', category: 'Supply' },
+      { label: 'Operations and Maintenance (O&M)', page: 'om', category: 'Field Service' },
+      { label: 'Warehouse Management', page: 'om', category: 'Logistics' }
     ]
   },
   {
-    label: 'ENGINEERING',
-    icon: HardHat,
+    label: 'ICT & CONSULTANCY',
+    icon: Server,
     overview: {
-      title: "Resilience",
-      description: "High-capacity telecom and power systems.",
-      cta: "Capabilities",
-      tag: "Infrastructure"
+      title: "Digital Systems",
+      description: "Design, implementation, and managed services for modern enterprises.",
+      cta: "Explore Tech",
+      tag: "Digital Core"
     },
     items: [
-      { label: 'Telecom Works', page: 'telecom', category: 'Field' },
-      { label: 'Power Systems', page: 'power', category: 'Field' },
-      { label: 'Operations & Maint.', page: 'om', category: 'Field' },
-      { label: 'Network Rollout', page: 'mobile-network', category: 'Field' },
-      { label: 'Energy Mgmt', page: 'energy-mgmt', category: 'Field' }
+      { label: 'Engineering Design', page: 'consultancy', category: 'Consultancy' },
+      { label: 'Installation, Commissioning, Services', page: 'ict', category: 'Field' },
+      { label: 'Maintenance', page: 'om', category: 'O&M' },
+      { label: 'Supplies ICT and infra', page: 'ict', category: 'Procurement' },
+      { label: 'AI & IOT', page: 'ai-iot', category: 'Innovation' },
+      { label: 'Software Solutions', page: 'ict', category: 'Solutions' },
+      { label: 'Elevators & Escalators', page: 'mobility', category: 'Mobility' }
     ]
   },
   {
-    label: 'INNOVATION',
-    icon: Lightbulb,
+    label: 'POWER & AUTOMATION',
+    icon: Zap,
     overview: {
-      title: "Digital Edge",
-      description: "Modernizing industry through ICT and AI.",
-      cta: "Digital Road",
-      tag: "Technology"
+      title: "Industrial Power",
+      description: "High-voltage systems and intelligent factory plant engineering.",
+      cta: "Power Grid",
+      tag: "Industrial"
     },
     items: [
-      { label: 'ICT & Connectivity', page: 'ict', category: 'Digital' },
-      { label: 'CoreSite Cloud', page: 'coresite', category: 'Digital' },
-      { label: 'AI & IoT Systems', page: 'ai-iot', category: 'Digital' },
-      { label: 'Vertical Mobility', page: 'mobility', category: 'Digital' },
-      { label: 'Smart Data Centers', page: 'datacenters', category: 'Digital' }
+      { label: 'MV, HV Systems Implementation', page: 'power', category: 'Grid' },
+      { label: 'Backup System (DG, Solar)', page: 'energy-mgmt', category: 'Energy' },
+      { label: 'Factory Plants Engineering', page: 'power', category: 'Automation' }
     ]
   },
   {
-    label: 'EXCELLENCE',
-    icon: Award,
+    label: 'TRAINING',
+    icon: GraduationCap,
     overview: {
-      title: "Integrity",
-      description: "Validated by global ISO standards.",
-      cta: "Certifications",
-      tag: "Standards"
+      title: "Academia",
+      description: "Center of Excellence for professional technicians and safety standards.",
+      cta: "View Academy",
+      tag: "Education"
     },
     items: [
-      { label: 'Awards & Honors', page: 'awards', category: 'Standards' },
-      { label: 'ISO IMS Standards', page: 'iso', category: 'Standards' },
-      { label: 'Engineering Academy', page: 'academy', category: 'Standards' },
-      { label: 'Consultancy PMO', page: 'consultancy', category: 'Standards' },
-      { label: 'EHS Center', page: 'ehs', category: 'Standards' }
+      { label: 'EHS', page: 'ehs', category: 'Safety' },
+      { label: 'Telecom Professional Training', page: 'academy', category: 'Technical' },
+      { label: 'Industrial Automation', page: 'power', category: 'Automation' },
+      { label: 'Facility and Data Center', page: 'datacenters', category: 'Infrastucture' }
     ]
   }
 ];
@@ -161,24 +162,27 @@ const TRUST_PARTNERS = ["NOKIA", "SAFARICOM", "UNITED NATIONS (UN)", "ETHIO TELE
 // --- Optimized Shared Components ---
 
 const LogoSymbol = ({ className = "", forceInvert = false, isFullColor = false }) => {
-  const primaryColor = isFullColor ? "#006699" : (forceInvert ? "#FFFFFF" : "#36454F");
-  const secondaryColor = isFullColor ? "#36454F" : (forceInvert ? "#FFFFFF" : "#00CFFF");
+  // Replicating colors from image: Blue link (#0072B8) and Charcoal/Black link (#1E1E1E)
+  const primaryColor = isFullColor ? "#0072B8" : (forceInvert ? "#FFFFFF" : "#1E1E1E");
+  const secondaryColor = isFullColor ? "#1E1E1E" : (forceInvert ? "#FFFFFF" : "#0072B8");
   
   return (
     <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Blue Link - Slanted and rounded as per image */}
       <motion.path 
-        d="M65.4 33.4C74.6 33.4 82 40.8 82 50C82 59.2 74.6 66.6 65.4 66.6L44.6 66.6C35.4 66.6 28 59.2 28 50C28 40.8 35.4 33.4 44.6 33.4L54 33.4" 
+        d="M32 42C22 52 22 68 32 78C42 88 58 88 68 78L82 64C92 54 92 38 82 28C72 18 56 18 46 28L32 42Z" 
         stroke={primaryColor} 
-        strokeWidth="10" 
+        strokeWidth="11" 
         strokeLinecap="round"
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{ pathLength: 1, opacity: 1 }}
         transition={{ duration: 1, ease: "easeInOut" }}
       />
+      {/* Black Link - Interlocking slant */}
       <motion.path 
-        d="M34.6 66.6C25.4 66.6 18 59.2 18 50C18 40.8 25.4 33.4 34.6 33.4L55.4 33.4C64.6 33.4 72 40.8 72 50C72 59.2 64.6 66.6 55.4 66.6L46 66.6" 
+        d="M68 58C78 48 78 32 68 22C58 12 42 12 32 22L18 36C8 46 8 62 18 72C28 82 44 82 54 72L68 58Z" 
         stroke={secondaryColor} 
-        strokeWidth="10" 
+        strokeWidth="11" 
         strokeLinecap="round"
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{ pathLength: 1, opacity: 1 }}
